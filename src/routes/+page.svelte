@@ -26,6 +26,17 @@
         responseText = defaultText
     }
 
+    async function handleClickTestInsert(){
+        const response = 
+            await fetch('/.netlify/functions/insert-note')
+		        .then(response => response.json()
+	        )
+
+        console.log(response)
+        responseText = response.message
+    }
+
+
 </script>
 
 <h1>Welcome to SvelteKit</h1>
@@ -53,3 +64,9 @@
     Reset
 </Button>
 {/if}
+
+
+<Button on:click={() => handleClickTestInsert()}>
+    Test Insert
+</Button>
+
