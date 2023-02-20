@@ -26,14 +26,21 @@
         responseText = defaultText
     }
 
-    async function handleClickTestInsert(){
-        const response = 
-            await fetch('/.netlify/functions/insert-note')
-		        .then(response => response.json()
-	        )
+    // async function handleClickTestInsert(){
+    //     const response = 
+    //         await fetch('/.netlify/functions/insert-note')
+	// 	        .then(response => response.json()
+	//         )
 
-        console.log(response)
-        responseText = response.message
+    //     console.log(response)
+    //     responseText = response.message
+    // }
+
+    async function handleClickPokedex(){
+        const response = await fetch('/.netlify/functions/pokedex')
+            .then(response => response.json())
+
+        responseText = JSON.stringify(response)
     }
 
 
@@ -44,6 +51,11 @@
 
 
 
+{#if responseText !== defaultText}
+<Button on:click={() => handleClickReset()}>
+    Reset
+</Button>
+{/if}
 
 <Button class="primary sm" on:click={() => handleClick('one')}>
 	{responseText}
@@ -59,14 +71,13 @@
     {responseText}
 </Button>
 
-{#if responseText !== defaultText}
-<Button on:click={() => handleClickReset()}>
-    Reset
-</Button>
-{/if}
 
-
+<!-- 
 <Button on:click={() => handleClickTestInsert()}>
     Test Insert
 </Button>
+ -->
 
+<Button on:click={() => handleClickPokedex()}>
+    Pokedex
+</Button>
